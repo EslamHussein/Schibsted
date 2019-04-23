@@ -1,3 +1,5 @@
+import com.schibsted.Configration
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -5,13 +7,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion Configration.Android.compileSdk
     defaultConfig {
-        applicationId "com.schibsted"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        applicationId Configration.Android.applicationId
+        minSdkVersion Configration.Android.mindSdk
+        targetSdkVersion Configration.Android.targetSdk
+        versionCode Configration.Android.versionCode
+        versionName Configration.Android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,11 +26,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.core:core-ktx:1.0.1'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation Configration.Kotlin.kotlinStdlib
+    implementation Configration.AndroidXSupport.appcompat
+    implementation Configration.AndroidXSupport.constraintLayout
+    implementation Configration.AndroidXSupport.coreKTX
+
+    testImplementation Configration.Testing.junit
+    androidTestImplementation Configration.Testing.supportTestRunner
+    androidTestImplementation Configration.Testing.espressoCore
+
 }
