@@ -3,18 +3,15 @@ package com.schibsted.exchangehistory
 import android.os.Bundle
 import android.util.Log
 import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.data.Set
-import com.anychart.enums.Anchor
 import com.anychart.enums.MarkerType
-import com.anychart.enums.TooltipPositionMode
-import com.anychart.graphics.vector.Stroke
 import com.schibsted.R
 import com.schibsted.core.view.MvpActivity
 import com.schibsted.exchangehistory.domain.Currencies
 import com.schibsted.exchangehistory.presentation.ExchangeHistoryContract
 import com.schibsted.exchangehistory.presentation.FiltrationType
+import com.schibsted.exchangehistory.presentation.dto.ExchangeDataEntry
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
@@ -28,13 +25,11 @@ class MainActivity : MvpActivity<ExchangeHistoryContract.Presenter>(), ExchangeH
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
         presenter.getExchangeHistory(FiltrationType.TwoYear, Currencies.USD, Currencies.EUR)
     }
 
 
-    override fun showExchange(result: List<CustomDataEntry>) {
+    override fun showExchange(result: List<ExchangeDataEntry>) {
         Log.d(javaClass.name, result.toString())
         any_chart_view.setProgressBar(progress_bar)
 
@@ -66,7 +61,6 @@ class MainActivity : MvpActivity<ExchangeHistoryContract.Presenter>(), ExchangeH
 
     override fun showError(error: String) {
         Log.d(javaClass.name, error)
-
     }
 
     override fun showLoading() {
@@ -80,5 +74,3 @@ class MainActivity : MvpActivity<ExchangeHistoryContract.Presenter>(), ExchangeH
 }
 
 
-class CustomDataEntry internal constructor(x: String, value: Double) :
-    ValueDataEntry(x, value)

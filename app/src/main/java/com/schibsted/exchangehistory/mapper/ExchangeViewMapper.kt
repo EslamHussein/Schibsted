@@ -2,15 +2,15 @@ package com.schibsted.exchangehistory.mapper
 
 import com.schibsted.core.mapper.Mapper
 import com.schibsted.core.remote.dto.Result
-import com.schibsted.exchangehistory.CustomDataEntry
 import com.schibsted.exchangehistory.data.remote.dto.ExchangeHistoryResponse
+import com.schibsted.exchangehistory.presentation.dto.ExchangeDataEntry
 
-class ExchangeViewMapper:Mapper<Result<ExchangeHistoryResponse>,Result<List<CustomDataEntry>>> {
-    override fun map(from: Result<ExchangeHistoryResponse>): Result<List<CustomDataEntry>> {
-        return  when (from) {
+class ExchangeViewMapper : Mapper<Result<ExchangeHistoryResponse>, Result<List<ExchangeDataEntry>>> {
+    override fun map(from: Result<ExchangeHistoryResponse>): Result<List<ExchangeDataEntry>> {
+        return when (from) {
             is Result.Success -> {
                 Result.Success(from.data.rates.toList().map {
-                    CustomDataEntry(it.first, it.second.EUR)
+                    ExchangeDataEntry(it.first, it.second.EUR)
                 })
             }
             is Result.Error -> {

@@ -2,14 +2,14 @@ package com.schibsted.exchangehistory.domain
 
 import com.schibsted.core.domain.UseCase
 import com.schibsted.core.remote.dto.Result
-import com.schibsted.exchangehistory.CustomDataEntry
 import com.schibsted.exchangehistory.mapper.ExchangeViewMapper
 import com.schibsted.exchangehistory.presentation.FiltrationType
+import com.schibsted.exchangehistory.presentation.dto.ExchangeDataEntry
 import com.schibsted.exchangehistory.repository.ExchangeRepository
 
 class GetExchangeHistoryUseCase(private val repository: ExchangeRepository, private val mapper: ExchangeViewMapper) :
-    UseCase<GetExchangeHistoryUseCase.Params, Result<List<CustomDataEntry>>> {
-    override suspend fun execute(param: Params?): Result<List<CustomDataEntry>> {
+    UseCase<GetExchangeHistoryUseCase.Params, Result<List<ExchangeDataEntry>>> {
+    override suspend fun execute(param: Params?): Result<List<ExchangeDataEntry>> {
         if (param == null) throw IllegalArgumentException("Params cannot be null")
         val result = repository.getHistory(param)
         return mapper.map(result)
