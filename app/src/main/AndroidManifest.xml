@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:name=".SchibstedApp"
             android:theme="@style/AppTheme">
-        <activity android:name=".exchangehistory.MainActivity">
+        <activity android:name=".exchangehistory.ExchangeHistoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

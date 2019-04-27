@@ -20,16 +20,14 @@ sealed class FiltrationType {
     object OneMonth : FiltrationType() {
         override val numberOfDays: Int
             get() = 30
-
     }
 
-    //
-    object TwoMonth : FiltrationType() {
+    object TwoMonths : FiltrationType() {
         override val numberOfDays: Int
             get() = 60
     }
 
-    object SixMonth : FiltrationType() {
+    object SixMonths : FiltrationType() {
         override val numberOfDays: Int
             get() = 180
     }
@@ -39,7 +37,7 @@ sealed class FiltrationType {
             get() = 365
     }
 
-    object TwoYear : FiltrationType() {
+    object TwoYears : FiltrationType() {
         override val numberOfDays: Int
             get() = 365 * 2
     }

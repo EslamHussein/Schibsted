@@ -43,15 +43,17 @@ public object Configration {
 
     object AndroidXSupport {
         private const val appCompact = "1.0.2"
+        private const val materialVersion = "1.0.0-rc01"
         private const val constraintLayoutVersion = "2.0.0-alpha2"
         private const val ktxVersion = "1.0.1"
+
 
         const val coreKTX = "androidx.core:core-ktx:$ktxVersion"
         const val appcompat = "androidx.appcompat:appcompat:$appCompact"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
-        const val material = "com.google.android.material:material:$appCompact"
+        const val material = "com.google.android.material:material:$materialVersion"
 
     }
 

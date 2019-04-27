@@ -22,6 +22,8 @@ class ExchangeHistoryViewModel(
     private lateinit var isLoading: MutableLiveData<Boolean>
     private lateinit var showError: MutableLiveData<String>
 
+
+
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = executionThread.mainScheduler + job
@@ -50,6 +52,11 @@ class ExchangeHistoryViewModel(
             showError = MutableLiveData()
         return showError
     }
+
+    fun updateExchangeHistory(filtrationType: FiltrationType, base: Currencies, to: Currencies) {
+        getExchangeHistory(filtrationType, base, to)
+    }
+
 
     private fun getExchangeHistory(filtrationType: FiltrationType, base: Currencies, to: Currencies) {
         launch(coroutineContext) {

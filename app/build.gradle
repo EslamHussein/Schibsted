@@ -33,6 +33,7 @@ dependencies {
 
     implementation Configration.Kotlin.kotlinStdlib
     implementation Configration.AndroidXSupport.appcompat
+    implementation Configration.AndroidXSupport.material
     implementation Configration.AndroidXSupport.constraintLayout
     implementation Configration.AndroidXSupport.coreKTX
 

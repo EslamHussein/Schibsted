@@ -13,7 +13,7 @@ internal class DefaultErrorHandler constructor(private val resourceManager: AppR
 
         return when (error) {
             is IOException, is UnknownHostException, is SocketException
-            -> resourceManager.getString(R.string.timeout_error_message)
+            -> resourceManager.getString(R.string.no_internet_connection)
             is SocketTimeoutException -> {
                 resourceManager.getString(R.string.timeout_error_message)
             }
