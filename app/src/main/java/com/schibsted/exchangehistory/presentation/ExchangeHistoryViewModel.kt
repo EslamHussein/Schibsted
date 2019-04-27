@@ -67,4 +67,9 @@ class ExchangeHistoryViewModel(
             isLoading.value = false
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineContext.cancel()
+    }
 }
