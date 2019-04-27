@@ -42,6 +42,7 @@ dependencies {
     implementation Configration.Network.okhttpLoggingInterceptor
 
     implementation Configration.Koin.koin
+    implementation Configration.Koin.koinViewModel
     implementation Configration.Koin.koinTest
 
     implementation Configration.Coroutines.coroutinesAndroid

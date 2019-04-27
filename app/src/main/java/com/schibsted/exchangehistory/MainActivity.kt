@@ -2,34 +2,44 @@ package com.schibsted.exchangehistory
 
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.data.Set
 import com.anychart.enums.MarkerType
 import com.schibsted.R
-import com.schibsted.core.view.MvpActivity
 import com.schibsted.exchangehistory.domain.Currencies
-import com.schibsted.exchangehistory.presentation.ExchangeHistoryContract
+import com.schibsted.exchangehistory.presentation.ExchangeHistoryViewModel
 import com.schibsted.exchangehistory.presentation.FiltrationType
 import com.schibsted.exchangehistory.presentation.dto.ExchangeDataEntry
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : MvpActivity<ExchangeHistoryContract.Presenter>(), ExchangeHistoryContract.View {
-    override val presenter: ExchangeHistoryContract.Presenter
-            by inject { parametersOf(this) }
-
+class MainActivity : AppCompatActivity() {
+    private val viewModel: ExchangeHistoryViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        presenter.getExchangeHistory(FiltrationType.TwoYear, Currencies.USD, Currencies.EUR)
+        viewModel.isShowLoading().observe(this, Observer {
+            if (it) {
+                showLoading()
+            } else {
+                hideLoading()
+            }
+        })
+        viewModel.getError().observe(this, Observer {
+            showError(it)
+        })
+
+        viewModel.getExchangeData(FiltrationType.TwoYear, Currencies.USD, Currencies.EUR).observe(this, Observer {
+            showExchange(it)
+        })
     }
 
 
-    override fun showExchange(result: List<ExchangeDataEntry>) {
+    private fun showExchange(result: List<ExchangeDataEntry>) {
         Log.d(javaClass.name, result.toString())
         any_chart_view.setProgressBar(progress_bar)
 
@@ -54,20 +64,19 @@ class MainActivity : MvpActivity<ExchangeHistoryContract.Presenter>(), ExchangeH
 
         cartesian.legend().enabled(true)
         cartesian.legend().fontSize(13.0)
-        cartesian.legend().padding(0.0, 0.0, 10.0, 0.0)
 
         any_chart_view.setChart(cartesian)
     }
 
-    override fun showError(error: String) {
+    private fun showError(error: String) {
         Log.d(javaClass.name, error)
     }
 
-    override fun showLoading() {
+    private fun showLoading() {
 
     }
 
-    override fun hideLoading() {
+    private fun hideLoading() {
 
     }
 

@@ -64,6 +64,7 @@ public object Configration {
     object Koin {
         private const val koinVersion = "1.0.2"
         const val koin = "org.koin:koin-android:$koinVersion"
+        const val koinViewModel = "org.koin:koin-androidx-viewmodel:$koinVersion"
         const val koinTest = "org.koin:koin-test:$koinVersion"
     }
 
