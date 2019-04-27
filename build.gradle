@@ -1,11 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 import com.schibsted.Configration
 
-buildscript {
+buildscript { 
+
     repositories {
         google()
         jcenter()
-        
+
     }
     dependencies {
         classpath Configration.ClassPath.gradle
@@ -19,7 +20,7 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+        maven { url 'https://jitpack.io' }
     }
 }
 

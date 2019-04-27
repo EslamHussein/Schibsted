@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Schibsted</string>
+    <string name="no_internet_connection">No internet connection</string>
+    <string name="timeout_error_message">Connection timeout</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="filter">Filter</string>
+    <string name="one_month">One Month</string>
+    <string name="six_months">six Months</string>
+    <string name="one_year">One Year</string>
+    <string name="two_years">two Years</string>
+    <string name="two_months">two Months</string>
+    <string name="loading">Loading...</string>
+
+
 </resources>

@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
 }
 
 dependencies {
@@ -29,11 +33,25 @@ dependencies {
 
     implementation Configration.Kotlin.kotlinStdlib
     implementation Configration.AndroidXSupport.appcompat
+    implementation Configration.AndroidXSupport.material
     implementation Configration.AndroidXSupport.constraintLayout
     implementation Configration.AndroidXSupport.coreKTX
+
+    implementation Configration.Network.coroutinesAadapter
+    implementation Configration.Network.retrofit
+    implementation Configration.Network.retrofitGsonConverter
+    implementation Configration.Network.okhttpLoggingInterceptor
+
+    implementation Configration.Koin.koin
+    implementation Configration.Koin.koinViewModel
+    implementation Configration.Koin.koinTest
+
+    implementation Configration.Coroutines.coroutinesAndroid
+    implementation Configration.Chart.anyChart
 
     testImplementation Configration.Testing.junit
     androidTestImplementation Configration.Testing.supportTestRunner
     androidTestImplementation Configration.Testing.espressoCore
+
 
 }

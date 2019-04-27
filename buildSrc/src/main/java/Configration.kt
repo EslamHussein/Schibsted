@@ -43,15 +43,17 @@ public object Configration {
 
     object AndroidXSupport {
         private const val appCompact = "1.0.2"
+        private const val materialVersion = "1.0.0-rc01"
         private const val constraintLayoutVersion = "2.0.0-alpha2"
         private const val ktxVersion = "1.0.1"
+
 
         const val coreKTX = "androidx.core:core-ktx:$ktxVersion"
         const val appcompat = "androidx.appcompat:appcompat:$appCompact"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
-        const val material = "com.google.android.material:material:$appCompact"
+        const val material = "com.google.android.material:material:$materialVersion"
 
     }
 
@@ -62,19 +64,28 @@ public object Configration {
     }
 
     object Koin {
-        const val koinVersion = "1.0.2"
+        private const val koinVersion = "1.0.2"
         const val koin = "org.koin:koin-android:$koinVersion"
+        const val koinViewModel = "org.koin:koin-androidx-viewmodel:$koinVersion"
         const val koinTest = "org.koin:koin-test:$koinVersion"
+    }
 
+    object Coroutines {
+        private const val version = "1.2.0"
+        const val coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+    }
+
+    object Chart {
+        private const val version = "1.1.2"
+        const val anyChart = "com.github.AnyChart:AnyChart-Android:$version"
     }
 
     object Testing {
 
-        const val junitVersion = "4.12"
-        const val supportTestRunnerVersion = "1.0.2"
-        const val espressoVersion = "3.1.1"
-        const val mockitoVersion = "2.8.47"
-
+        private const val junitVersion = "4.12"
+        private const val supportTestRunnerVersion = "1.0.2"
+        private const val espressoVersion = "3.1.1"
+        private const val mockitoVersion = "2.8.47"
 
         const val junit = "junit:junit:${junitVersion}"
         const val supportTestRunner = "com.android.support.test:runner:$supportTestRunnerVersion"
