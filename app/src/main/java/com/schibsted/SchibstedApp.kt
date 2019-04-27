@@ -2,7 +2,7 @@ package com.schibsted
 
 import android.app.Application
 import com.schibsted.core.remote.di.remoteModule
-import com.schibsted.core.resource.di.appModule
+import com.schibsted.core.di.appModule
 import com.schibsted.exchangehistory.di.exchangeHistoryModule
 import org.koin.android.ext.android.startKoin
 

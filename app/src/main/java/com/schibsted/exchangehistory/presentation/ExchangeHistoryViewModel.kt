@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.schibsted.core.exception.ErrorHandler
+import com.schibsted.core.executor.ExecutionThread
 import com.schibsted.core.remote.dto.Result
 import com.schibsted.exchangehistory.domain.Currencies
 import com.schibsted.exchangehistory.domain.GetExchangeHistoryUseCase
@@ -12,7 +13,7 @@ import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class ExchangeHistoryViewModel(
-    private val errorHandler: ErrorHandler,
+    private val errorHandler: ErrorHandler, private val executionThread: ExecutionThread,
     private val useCase: GetExchangeHistoryUseCase
 ) : ViewModel(), CoroutineScope {
 
@@ -23,7 +24,7 @@ class ExchangeHistoryViewModel(
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+        get() = executionThread.mainScheduler + job
 
 
     fun getExchangeData(
@@ -53,7 +54,7 @@ class ExchangeHistoryViewModel(
     private fun getExchangeHistory(filtrationType: FiltrationType, base: Currencies, to: Currencies) {
         launch(coroutineContext) {
             isLoading.value = true
-            when (val result = withContext(Dispatchers.IO) {
+            when (val result = withContext(executionThread.ioScheduler) {
                 useCase.execute(GetExchangeHistoryUseCase.Params.create(filtrationType, base, to))
             }) {
                 is Result.Success -> {

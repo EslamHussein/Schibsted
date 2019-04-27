@@ -15,7 +15,7 @@ import retrofit2.Retrofit
 val exchangeHistoryModule = module {
     factory { get<Retrofit>().create(ExchangeApi::class.java) }
 
-    viewModel { ExchangeHistoryViewModel(get(), get()) }
+    viewModel { ExchangeHistoryViewModel(get(), get(), get()) }
 
     single<ExchangeRepository> { ExchangeRepositoryImpl(get()) }
     single<ExchangeRemoteDataSource> { ExchangeRemoteDataSourceImpl(get(), get()) }
