@@ -1,7 +1,6 @@
 package com.schibsted.exchangehistory
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,6 +12,7 @@ import com.anychart.enums.MarkerType
 import com.google.android.material.snackbar.Snackbar
 import com.schibsted.R
 import com.schibsted.exchangehistory.domain.Currencies
+import com.schibsted.exchangehistory.presentation.ExchangeHistoryState
 import com.schibsted.exchangehistory.presentation.ExchangeHistoryViewModel
 import com.schibsted.exchangehistory.presentation.FiltrationType
 import com.schibsted.exchangehistory.presentation.dto.ExchangeDataEntry
@@ -28,6 +28,33 @@ class ExchangeHistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_exchange_history)
         setSupportActionBar(toolbar)
 
+        if (savedInstanceState == null)
+            viewModel.updateExchangeHistory(FiltrationType.OneMonth, Currencies.USD, Currencies.EUR)
+
+        viewModel.getExchangeData()
+            .observe(this, Observer {
+                when (it) {
+                    is ExchangeHistoryState.Error -> {
+                        showError(it.errorMsg)
+                        hideLoading()
+                    }
+                    is ExchangeHistoryState.Data -> {
+                        showExchange(it.data)
+                        hideLoading()
+                    }
+                    is ExchangeHistoryState.Loading -> {
+                        showLoading()
+                    }
+                }
+            })
+    }
+
+
+    private fun showExchange(result: List<ExchangeDataEntry>) {
+        exchangeChartView.visibility = View.VISIBLE
+        errorLoadingTextView.visibility = View.INVISIBLE
+        exchangeChartView.clear()
+
         val cartesian = AnyChart.line()
 
         cartesian.animation(true)
@@ -35,6 +62,7 @@ class ExchangeHistoryActivity : AppCompatActivity() {
         cartesian.xAxis(0).labels().padding(5.0, 5.0, 5.0, 5.0)
 
         chartData = Set.instantiate()
+        chartData.data(result)
         val chartDataMapping = chartData.mapAs("{ x: 'x', value: 'value' }")
 
         cartesian.line(chartDataMapping).apply {
@@ -51,30 +79,7 @@ class ExchangeHistoryActivity : AppCompatActivity() {
         }
         exchangeChartView.setChart(cartesian)
 
-        viewModel.isShowLoading().observe(this, Observer {
-            if (it) {
-                showLoading()
-            } else {
-                hideLoading()
-            }
-        })
-        viewModel.getError().observe(this, Observer {
-            showError(it)
-        })
 
-        viewModel.getExchangeData(FiltrationType.OneMonth, Currencies.USD, Currencies.EUR)
-            .observe(this, Observer {
-                Log.d(javaClass.name, it.joinToString { it.keySet().toString() })
-                showExchange(it)
-            })
-    }
-
-
-    private fun showExchange(result: List<ExchangeDataEntry>) {
-        exchangeChartView.visibility = View.VISIBLE
-        errorLoadingTextView.visibility = View.INVISIBLE
-        chartData.data(result)
-        exchangeChartView.invalidate()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
