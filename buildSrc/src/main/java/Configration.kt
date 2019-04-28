@@ -38,6 +38,7 @@ public object Configration {
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
         const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
         const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+        const val okhttpMockServer= "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
     }
 

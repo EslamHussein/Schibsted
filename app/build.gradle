@@ -41,6 +41,7 @@ dependencies {
     implementation Configration.Network.retrofit
     implementation Configration.Network.retrofitGsonConverter
     implementation Configration.Network.okhttpLoggingInterceptor
+    implementation Configration.Network.okhttpMockServer
 
     implementation Configration.Koin.koin
     implementation Configration.Koin.koinViewModel
