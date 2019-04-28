@@ -50,6 +50,9 @@ dependencies {
     implementation Configration.Coroutines.coroutinesAndroid
     implementation Configration.Chart.anyChart
 
+    testImplementation Configration.Testing.mockitoForKotlin
+    testImplementation Configration.Testing.mockitoCore
+
     testImplementation Configration.Testing.junit
     androidTestImplementation Configration.Testing.supportTestRunner
     androidTestImplementation Configration.Testing.espressoCore
