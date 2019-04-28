@@ -12,12 +12,10 @@ import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import com.github.mikephil.charting.formatter.IFillFormatter
 import com.google.android.material.snackbar.Snackbar
 import com.schibsted.R
 import com.schibsted.exchangehistory.domain.Currencies
 import com.schibsted.exchangehistory.presentation.DateValueFormatter
-import com.schibsted.exchangehistory.presentation.ExchangeHistoryState
 import com.schibsted.exchangehistory.presentation.ExchangeHistoryViewModel
 import com.schibsted.exchangehistory.presentation.FiltrationType
 import kotlinx.android.synthetic.main.activity_exchange_history.*
@@ -36,20 +34,20 @@ class ExchangeHistoryActivity : AppCompatActivity() {
 
         viewModel.getExchangeData()
             .observe(this, Observer {
-                when (it) {
-                    is ExchangeHistoryState.Error -> {
-                        showError(it.errorMsg)
-                        hideLoading()
-                    }
-                    is ExchangeHistoryState.Data -> {
-                        showExchange(it.data)
-                        hideLoading()
-                    }
-                    is ExchangeHistoryState.Loading -> {
-                        showLoading()
-                    }
-                }
+                showExchange(it)
+                hideLoading()
             })
+
+        viewModel.getError().observe(this, Observer {
+            showError(it)
+            hideLoading()
+        })
+        viewModel.isShowLoading().observe(this, Observer {
+            if (it)
+                showLoading()
+            else
+                hideLoading()
+        })
     }
 
 
@@ -65,7 +63,7 @@ class ExchangeHistoryActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_exchange_history, menu)
-        return true;
+        return true
     }
 
 

@@ -42,7 +42,6 @@ class GetExchangeHistoryUseCaseTest {
 
         val testResult = getExchangeHistoryUseCase.execute(testParam)
 
-
         Assert.assertThat(testResult, CoreMatchers.instanceOf(Result.Success::class.java))
 
     }
