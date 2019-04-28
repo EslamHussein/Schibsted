@@ -35,12 +35,10 @@ class ExchangeHistoryActivity : AppCompatActivity() {
         viewModel.getExchangeData()
             .observe(this, Observer {
                 showExchange(it)
-                hideLoading()
             })
 
         viewModel.getError().observe(this, Observer {
             showError(it)
-            hideLoading()
         })
         viewModel.isShowLoading().observe(this, Observer {
             if (it)

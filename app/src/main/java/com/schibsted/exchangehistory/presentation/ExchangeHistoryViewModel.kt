@@ -18,7 +18,6 @@ class ExchangeHistoryViewModel(
 ) : ViewModel(), CoroutineScope {
 
     val exchangeData: MutableLiveData<List<Entry>>  by lazy { MutableLiveData<List<Entry>>() }
-
     val isLoading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
     val showError: MutableLiveData<String> by lazy { MutableLiveData<String>() }
 
@@ -52,7 +51,7 @@ class ExchangeHistoryViewModel(
                     showError.value = errorHandler.getErrorMessage(result.exception)
                 }
             }
-            isLoading.value = true
+            isLoading.value = false
         }
     }
 
