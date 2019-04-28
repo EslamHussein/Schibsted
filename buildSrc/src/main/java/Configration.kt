@@ -77,8 +77,8 @@ public object Configration {
     }
 
     object Chart {
-        private const val version = "1.1.2"
-        const val anyChart = "com.github.AnyChart:AnyChart-Android:$version"
+        private const val version = "v3.1.0"
+        const val MPAndroidChart = "com.github.PhilJay:MPAndroidChart:$version"
     }
 
     object Testing {

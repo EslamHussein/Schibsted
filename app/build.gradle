@@ -48,7 +48,7 @@ dependencies {
     implementation Configration.Koin.koinTest
 
     implementation Configration.Coroutines.coroutinesAndroid
-    implementation Configration.Chart.anyChart
+    implementation Configration.Chart.MPAndroidChart
 
     testImplementation Configration.Testing.mockitoForKotlin
     testImplementation Configration.Testing.mockitoCore

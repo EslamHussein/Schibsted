@@ -34,9 +34,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@string/no_internet_connection"
+            android:text="@string/loading"
             android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-    <com.anychart.AnyChartView
+    <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/exchangeChartView"
             android:layout_width="0dp"
             android:visibility="invisible"

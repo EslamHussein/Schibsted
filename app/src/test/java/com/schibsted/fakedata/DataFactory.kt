@@ -23,7 +23,7 @@ object DataFactory {
 
     private fun getCurrency(): Currency {
 
-        return Currency(Random.nextDouble(0.5, 0.99))
+        return Currency(Random.nextFloat())
     }
 
     private fun getRandomDate(startDateString: String, endDateString: String): String {
