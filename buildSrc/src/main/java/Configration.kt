@@ -38,6 +38,7 @@ public object Configration {
         const val retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
         const val retrofitGsonConverter = "com.squareup.retrofit2:converter-gson:$retrofitVersion"
         const val okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+        const val okhttpMockServer = "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
     }
 
@@ -76,26 +77,33 @@ public object Configration {
     }
 
     object Chart {
-        private const val version = "1.1.2"
-        const val anyChart = "com.github.AnyChart:AnyChart-Android:$version"
+        private const val version = "v3.1.0"
+        const val MPAndroidChart = "com.github.PhilJay:MPAndroidChart:$version"
     }
 
     object Testing {
 
-        private const val junitVersion = "4.12"
         private const val supportTestRunnerVersion = "1.0.2"
         private const val espressoVersion = "3.1.1"
         private const val mockitoVersion = "2.8.47"
+        private const val mockitoForKotlinVersion = "2.1.0"
+        private const val androidXCoreTestingVersion = "2.0.0-alpha1"
 
-        const val junit = "junit:junit:${junitVersion}"
+
+        const val junit = "org.jetbrains.kotlin:kotlin-test-junit:${Android.kotlinVersion}"
         const val supportTestRunner = "com.android.support.test:runner:$supportTestRunnerVersion"
         const val supportTestRules = "com.android.support.test:rules:$supportTestRunnerVersion"
+        const val androidXCoreTesting = "androidx.arch.core:core-testing:$androidXCoreTestingVersion"
+
+
 
         const val espressoCore = "com.android.support.test.espresso:espresso-core:$espressoVersion"
 
         const val espressoIdlingResource =
             "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
         const val mockitoCore = "org.mockito:mockito-core:$mockitoVersion"
+        const val mockitoForKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockitoForKotlinVersion}"
+
         const val espressoContrib = "com.android.support.test.espresso:espresso-contrib:$espressoVersion"
     }
 

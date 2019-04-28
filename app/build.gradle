@@ -41,15 +41,20 @@ dependencies {
     implementation Configration.Network.retrofit
     implementation Configration.Network.retrofitGsonConverter
     implementation Configration.Network.okhttpLoggingInterceptor
+    implementation Configration.Network.okhttpMockServer
 
     implementation Configration.Koin.koin
     implementation Configration.Koin.koinViewModel
     implementation Configration.Koin.koinTest
 
     implementation Configration.Coroutines.coroutinesAndroid
-    implementation Configration.Chart.anyChart
+    implementation Configration.Chart.MPAndroidChart
+
+    testImplementation Configration.Testing.mockitoForKotlin
+    testImplementation Configration.Testing.mockitoCore
 
     testImplementation Configration.Testing.junit
+    testImplementation Configration.Testing.androidXCoreTesting
     androidTestImplementation Configration.Testing.supportTestRunner
     androidTestImplementation Configration.Testing.espressoCore
 

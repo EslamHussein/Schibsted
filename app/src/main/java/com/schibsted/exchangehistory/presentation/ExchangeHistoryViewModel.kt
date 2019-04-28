@@ -3,12 +3,12 @@ package com.schibsted.exchangehistory.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.github.mikephil.charting.data.Entry
 import com.schibsted.core.exception.ErrorHandler
 import com.schibsted.core.executor.ExecutionThread
 import com.schibsted.core.remote.dto.Result
 import com.schibsted.exchangehistory.domain.Currencies
 import com.schibsted.exchangehistory.domain.GetExchangeHistoryUseCase
-import com.schibsted.exchangehistory.presentation.dto.ExchangeDataEntry
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -17,53 +17,33 @@ class ExchangeHistoryViewModel(
     private val useCase: GetExchangeHistoryUseCase
 ) : ViewModel(), CoroutineScope {
 
-    private lateinit var exchangeData: MutableLiveData<List<ExchangeDataEntry>>
-
-    private lateinit var isLoading: MutableLiveData<Boolean>
-    private lateinit var showError: MutableLiveData<String>
-
-
+    val exchangeData: MutableLiveData<List<Entry>>  by lazy { MutableLiveData<List<Entry>>() }
+    val isLoading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val showError: MutableLiveData<String> by lazy { MutableLiveData<String>() }
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = executionThread.mainScheduler + job
 
-
-    fun getExchangeData(
-        filtrationType: FiltrationType,
-        base: Currencies,
-        to: Currencies
-    ): LiveData<List<ExchangeDataEntry>> {
-        if (!::exchangeData.isInitialized) {
-            exchangeData = MutableLiveData()
-            getExchangeHistory(filtrationType, base, to)
-        }
+    fun getExchangeData(): LiveData<List<Entry>> {
         return exchangeData
     }
 
     fun isShowLoading(): LiveData<Boolean> {
-        if (!::isLoading.isInitialized)
-            isLoading = MutableLiveData()
         return isLoading
     }
 
     fun getError(): LiveData<String> {
-        if (!::showError.isInitialized)
-            showError = MutableLiveData()
         return showError
     }
 
     fun updateExchangeHistory(filtrationType: FiltrationType, base: Currencies, to: Currencies) {
-        getExchangeHistory(filtrationType, base, to)
-    }
-
-
-    private fun getExchangeHistory(filtrationType: FiltrationType, base: Currencies, to: Currencies) {
         launch(coroutineContext) {
             isLoading.value = true
-            when (val result = withContext(executionThread.ioScheduler) {
+            val result = withContext(executionThread.ioScheduler) {
                 useCase.execute(GetExchangeHistoryUseCase.Params.create(filtrationType, base, to))
-            }) {
+            }
+            when (result) {
                 is Result.Success -> {
                     exchangeData.value = result.data
                 }
@@ -76,7 +56,7 @@ class ExchangeHistoryViewModel(
     }
 
     override fun onCleared() {
-        super.onCleared()
         coroutineContext.cancel()
+        super.onCleared()
     }
 }

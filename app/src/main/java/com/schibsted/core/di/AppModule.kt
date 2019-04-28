@@ -10,7 +10,7 @@ import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 val appModule = module {
-    single { AppResources(application = androidApplication()) }
+    single { AppResources(context = androidApplication()) }
     single { ResourcesRepository(get()) }
     factory<ErrorHandler> {
         DefaultErrorHandler(get())
