@@ -7,6 +7,7 @@ import com.schibsted.exchangehistory.domain.GetExchangeHistoryUseCase
 
 class ExchangeRepositoryImpl(private val remote: ExchangeRemoteDataSource) : ExchangeRepository {
     override suspend fun getHistory(params: GetExchangeHistoryUseCase.Params): Result<ExchangeHistoryResponse> {
+
         return remote.getHistory(
             params.filtrationType.start, params.filtrationType.end
             , params.base, params.to
