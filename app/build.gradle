@@ -54,6 +54,7 @@ dependencies {
     testImplementation Configration.Testing.mockitoCore
 
     testImplementation Configration.Testing.junit
+    testImplementation Configration.Testing.androidXCoreTesting
     androidTestImplementation Configration.Testing.supportTestRunner
     androidTestImplementation Configration.Testing.espressoCore
 

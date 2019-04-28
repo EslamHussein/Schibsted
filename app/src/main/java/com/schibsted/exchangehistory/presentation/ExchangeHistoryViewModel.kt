@@ -17,40 +17,34 @@ class ExchangeHistoryViewModel(
     private val useCase: GetExchangeHistoryUseCase
 ) : ViewModel(), CoroutineScope {
 
-    private lateinit var exchangeData: MutableLiveData<List<Entry>>
+    val exchangeData: MutableLiveData<List<Entry>>  by lazy { MutableLiveData<List<Entry>>() }
 
-    private lateinit var isLoading: MutableLiveData<Boolean>
-    private lateinit var showError: MutableLiveData<String>
+    val isLoading: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val showError: MutableLiveData<String> by lazy { MutableLiveData<String>() }
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
         get() = executionThread.mainScheduler + job
 
     fun getExchangeData(): LiveData<List<Entry>> {
-        if (!::exchangeData.isInitialized) {
-            exchangeData = MutableLiveData()
-        }
         return exchangeData
     }
 
     fun isShowLoading(): LiveData<Boolean> {
-        if (!::isLoading.isInitialized)
-            isLoading = MutableLiveData()
         return isLoading
     }
 
     fun getError(): LiveData<String> {
-        if (!::showError.isInitialized)
-            showError = MutableLiveData()
         return showError
     }
 
     fun updateExchangeHistory(filtrationType: FiltrationType, base: Currencies, to: Currencies) {
         launch(coroutineContext) {
             isLoading.value = true
-            when (val result = withContext(executionThread.ioScheduler) {
+            val result = withContext(executionThread.ioScheduler) {
                 useCase.execute(GetExchangeHistoryUseCase.Params.create(filtrationType, base, to))
-            }) {
+            }
+            when (result) {
                 is Result.Success -> {
                     exchangeData.value = result.data
                 }

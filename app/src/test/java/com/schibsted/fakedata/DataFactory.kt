@@ -1,5 +1,6 @@
 package com.schibsted.fakedata
 
+import com.github.mikephil.charting.data.Entry
 import com.schibsted.core.toFormattedDate
 import com.schibsted.exchangehistory.data.remote.dto.Currency
 import com.schibsted.exchangehistory.data.remote.dto.ExchangeHistoryResponse
@@ -38,6 +39,17 @@ object DataFactory {
 
         val randomEpochDay = ThreadLocalRandom.current().longs(start, end).findAny().asLong
         return Date(randomEpochDay).toFormattedDate()
+    }
+
+
+    fun getListEntry(): List<Entry> {
+
+        val list = mutableListOf<Entry>()
+        repeat(5) {
+            list.add(Entry(Random.nextFloat(), Random.nextFloat()))
+        }
+        return list
+
     }
 
 

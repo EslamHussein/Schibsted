@@ -87,10 +87,15 @@ public object Configration {
         private const val espressoVersion = "3.1.1"
         private const val mockitoVersion = "2.8.47"
         private const val mockitoForKotlinVersion = "2.1.0"
+        private const val androidXCoreTestingVersion = "2.0.0-alpha1"
+
 
         const val junit = "org.jetbrains.kotlin:kotlin-test-junit:${Android.kotlinVersion}"
         const val supportTestRunner = "com.android.support.test:runner:$supportTestRunnerVersion"
         const val supportTestRules = "com.android.support.test:rules:$supportTestRunnerVersion"
+        const val androidXCoreTesting = "androidx.arch.core:core-testing:$androidXCoreTestingVersion"
+
+
 
         const val espressoCore = "com.android.support.test.espresso:espresso-core:$espressoVersion"
 
