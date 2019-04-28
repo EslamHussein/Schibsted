@@ -8,8 +8,8 @@ import com.schibsted.exchangehistory.mapper.ExchangeViewMapper
 import com.schibsted.exchangehistory.presentation.ExchangeHistoryViewModel
 import com.schibsted.exchangehistory.repository.ExchangeRepository
 import com.schibsted.exchangehistory.repository.ExchangeRepositoryImpl
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val exchangeHistoryModule = module {

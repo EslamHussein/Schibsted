@@ -1,10 +1,12 @@
 package com.schibsted
 
 import android.app.Application
-import com.schibsted.core.remote.di.remoteModule
 import com.schibsted.core.di.appModule
+import com.schibsted.core.remote.di.remoteModule
 import com.schibsted.exchangehistory.di.exchangeHistoryModule
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 class SchibstedApp : Application() {
 
@@ -12,7 +14,11 @@ class SchibstedApp : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        startKoin(this, listOf(remoteModule, appModule, exchangeHistoryModule))
+        startKoin {
+            androidLogger()
+            androidContext(this@SchibstedApp)
+            modules(listOf(remoteModule, appModule, exchangeHistoryModule))
+        }
 
     }
 
